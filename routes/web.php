@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Livewire\Admin\Business\BusinessCreateComponent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Tag\TagComponent;
+use App\Http\Livewire\Admin\Business\BusinessIndexComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home',                             [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/tag',                              TagComponent::class)->name('tag');
+Route::get('/business',                         BusinessIndexComponent::class)->name('business');
+Route::get('/business/create',                  BusinessCreateComponent::class)->name('business.create');
+Route::get('/business/{business}/edit',         BusinessCreateComponent::class)->name('business.edit');
+
+

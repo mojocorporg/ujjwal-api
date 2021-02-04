@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BusinessPhone extends Model
 {
     use HasFactory;
+
+    
 }
