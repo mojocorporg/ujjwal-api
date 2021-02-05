@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\Tag\TagController;
+use App\Http\Controllers\API\Business\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/tags',                             [TagController::class, 'index'])->name('tags');
+
+Route::get('/businesses',                       [BusinessController::class, 'index'])->name('businesses');
+Route::get('/business/{business}',              [BusinessController::class, 'show'])->name('business.show');
