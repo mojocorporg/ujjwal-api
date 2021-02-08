@@ -111,14 +111,14 @@ class BusinessController extends Controller
     {
         $user = $request->user();
 
-        $user_business = $user->business_user();
+        $user_business = $user->business_user()->where('business_id', $business->id);
         
-        if(!$user_business){
-            $user_business->create(['business_id' => $business->id, 'call_count' => 1]);
-        }else{
+        if($user_business->count()){
             $user_business = $user_business->first();
             $user_business->call_count = $user_business->call_count + 1;
             $user_business->update();
+        }else{
+            $user_business->create(['business_id' => $business->id, 'call_count' => 1]);
         }
         // $user_business->increment('call_count');
 
@@ -131,9 +131,9 @@ class BusinessController extends Controller
 
         $user = $request->user();
 
-        $user_business = $user->business_user();
+        $user_business = $user->business_user()->where('business_id', $business->id);
         
-        if($user_business){
+        if($user_business->count()){
             $user_business = $user_business->first();
             $user_business->share_count = $user_business->share_count + 1;
             $user_business->update();
