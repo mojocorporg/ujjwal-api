@@ -34,6 +34,21 @@ class BusinessController extends Controller
     }
 
 
+    public function accepted(Request $request)
+    {
+        $user = $request->user();
+
+        $business = Business::with('phones', 'tags', 'reviews')
+                    ->whereHas('business_user', function($query) use($user){
+                        $query->where('user_id', $user->id)->where('status', 'accepted');
+                    })
+                    ->where('status', 1)
+                    ->get();
+
+        return BusinessListResource::collection($business);
+        
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +60,7 @@ class BusinessController extends Controller
     {
         $request->validate([
             'business_id' => 'required',
-            'reviews' => 'required'
+            'reviews' => 'sometimes'
         ]);
 
         $user = $request->user();
@@ -141,7 +156,7 @@ class BusinessController extends Controller
     }
 
 
-    public function review(Request $request, Business $business)
+    public function mark(Request $request, Business $business)
     {
         $request->validate([
             'status' => ['required', Rule::in(['accepted', 'rejected'])],

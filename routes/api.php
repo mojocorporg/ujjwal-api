@@ -28,6 +28,7 @@ Route::get('/tags',                             [TagController::class, 'index'])
 
 Route::get('/businesses/without_login',         [BusinessController::class, 'without_login'])->name('businesses.without_login');
 Route::get('/businesses/with_login',            [BusinessController::class, 'with_login'])->name('businesses.with_login')->middleware('auth:sanctum');
+Route::get('/businesses/accepted',              [BusinessController::class, 'accepted'])->name('businesses.accepted')->middleware('auth:sanctum');
 
 Route::get('/business/{business}',              [BusinessController::class, 'show'])->name('business.show')->middleware('auth:sanctum');
 
@@ -37,5 +38,4 @@ Route::post('/business/review',                 [BusinessController::class, 'sto
 Route::post('business/{business}/call_count',   [BusinessController::class, 'call_count'])->name('business.call_count')->middleware('auth:sanctum');
 Route::post('business/{business}/share_count',  [BusinessController::class, 'share_count'])->name('business.share_count')->middleware('auth:sanctum');
 Route::post('business/{business}/feedback',     [BusinessController::class, 'feedback'])->name('business.feedback')->middleware('auth:sanctum');
-Route::post('business/{business}/review',       [BusinessController::class, 'review'])->name('business.review')->middleware('auth:sanctum');
-
+Route::post('business/{business}/mark',         [BusinessController::class, 'mark'])->name('business.review')->middleware('auth:sanctum');
