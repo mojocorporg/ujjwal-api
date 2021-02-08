@@ -13,4 +13,14 @@ class Business extends Model
     {
         return $this->hasMany(\App\Models\BusinessPhone::class, 'business_id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(\App\Models\Tag::class);
+    }
+
+    public function business_user()
+    {
+        return $this->hasMany(\App\Models\BusinessUser::class);
+    }
 }

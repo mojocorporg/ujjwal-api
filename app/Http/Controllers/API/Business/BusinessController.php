@@ -31,7 +31,24 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'business_id' => 'required',
+            'reviews' => 'required'
+        ]);
+
+        $user = $request->user();
+
+        $business = Business::find($request->business_id);
+
+        $reviewArray = [];
+        foreach($request->reviews as $key => $review){
+            array_push($reviewArray, ['review_id' => $review, 'business_id' => $business->id, 'created_at' => now(), 'updated_at' => now()]);
+        }
+
+        $user->reviews()->sync($reviewArray);
+
+        return response()->json(['status' => true, 'message' => 'Review Added Successfully']);
+
     }
 
     /**
@@ -52,9 +69,56 @@ class BusinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function call_count(Request $request, Business $business)
     {
-        //
+        $user = $request->user();
+
+        $user_business = $user->business_user();
+        
+        if(!$user_business)
+        $user_business->create(['business_id' => $business->id, 'call_count' => 1]);
+        else
+        $user_business->increment('call_count');
+
+        return response()->json(['status' => true, 'message' => 'Business Call Count Updated']);
+    }
+
+
+    public function share_count(Request $request, Business $business)
+    {
+
+        $user = $request->user();
+
+        $user_business = $user->business_user();
+        
+        if($user_business)
+        $user_business->first()->increment('share_count');
+        else
+        $user_business->create(['business_id' => $business->id, 'share_count' => 1]);
+
+        return response()->json(['status' => true, 'message' => 'Business Share Count Updated']);
+    }
+
+
+    public function feedback(Request $request, Business $business)
+    {
+        $request->validate([
+            'feedback' => 'required',
+        ]);
+
+        $user = $request->user();
+
+        $user_business = $user->business_user();
+        
+        if($user_business){
+            $user_business = $user_business->first();
+            $user_business->feedback = $request->feedback;
+            $user_business->update();
+        }else{
+            $user_business->create(['business_id' => $business->id, 'feedback' => $request->feedback]);
+        }
+
+        return response()->json(['status' => true, 'message' => 'Business Share Count Updated']);
     }
 
     /**

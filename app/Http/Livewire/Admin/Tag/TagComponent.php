@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 
 class TagComponent extends Component
 {   
-
     use WithPagination;
 
     public $module = 'Tag';

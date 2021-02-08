@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Livewire\Admin\Business\BusinessCreateComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tag\TagComponent;
+use App\Http\Livewire\Admin\Rule\RulesComponent;
+use App\Http\Livewire\Admin\Review\ReviewComponent;
 use App\Http\Livewire\Admin\Business\BusinessIndexComponent;
+use App\Http\Livewire\Admin\Business\BusinessCreateComponent;
+use App\Http\Livewire\Admin\Notification\NotificationIndexComponent;
+use App\Http\Livewire\Admin\Notification\NotificationCreateComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +32,9 @@ Route::get('/business',                         BusinessIndexComponent::class)->
 Route::get('/business/create',                  BusinessCreateComponent::class)->name('business.create');
 Route::get('/business/{business}/edit',         BusinessCreateComponent::class)->name('business.edit');
 
+Route::get('rules',                             RulesComponent::class)->name('rules.update');
+Route::get('notification',                      NotificationIndexComponent::class)->name('notification.index');
+Route::get('notification/create',               NotificationCreateComponent::class)->name('notification.create');
+Route::get('notification/{notification}/edit',  NotificationCreateComponent::class)->name('notification.edit');
 
+Route::get('review',                            ReviewComponent::class)->name('review');

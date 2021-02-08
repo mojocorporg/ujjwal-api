@@ -13,7 +13,7 @@
 
         <li class="nav-item">
             <a href="{{ route('tag') }}" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-tags"></i>
                 <p>
                     Tag
                 </p>
@@ -22,11 +22,39 @@
 
         <li class="nav-item">
             <a href="{{ route('business') }}" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-building"></i>
                 <p>
                     Business
                 </p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('rules.update') }}" class="nav-link">
+                <i class="nav-icon fas fa-list"></i>
+                <p>
+                    Rules
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('notification.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-bell"></i>
+                <p>
+                    Notification
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('review') }}" class="nav-link">
+                <i class="nav-icon fas fa-bell"></i>
+                <p>
+                  Review
+                </p>
+            </a>
+        </li>
+        
     </ul>
 </nav>

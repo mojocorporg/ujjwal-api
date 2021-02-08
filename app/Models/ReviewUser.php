@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessUser extends Model
+class ReviewUser extends Model
 {
     use HasFactory;
 
-    public $fillable = ['user_id', 'business_id', 'call_count', 'share_count', 'feedback'];
+    public $table = 'review_user';
 
+    public $fillable = ['business_id', 'user_id', 'review_id'];
+    
 }
