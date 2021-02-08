@@ -74,7 +74,7 @@ class BusinessController extends Controller
             }
         }
 
-        $user->reviews()->sync($reviewArray);
+        $user->reviews()->where('pivot.user_id', $user->id)->sync($reviewArray);
 
         return response()->json(['status' => true, 'message' => 'Review Added Successfully']);
 
