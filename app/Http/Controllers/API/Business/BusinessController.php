@@ -68,8 +68,10 @@ class BusinessController extends Controller
         $business = Business::find($request->business_id);
 
         $reviewArray = [];
-        foreach($request->reviews as $key => $review){
-            array_push($reviewArray, ['review_id' => $review, 'business_id' => $business->id, 'created_at' => now(), 'updated_at' => now()]);
+        if($request->reviews){
+            foreach($request->reviews as $key => $review){
+                array_push($reviewArray, ['review_id' => $review, 'business_id' => $business->id, 'created_at' => now(), 'updated_at' => now()]);
+            }
         }
 
         $user->reviews()->sync($reviewArray);
