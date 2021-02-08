@@ -27,7 +27,16 @@ class BusinessController extends Controller
 
     public function with_login(Request $request)
     {
-        $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
+        if($request->tags){
+            $tags = explode(',', $request->tags);
+            $business = Business::with('phones', 'tags', 'reviews')->whereHas('tags', function($query) use($tags){
+                $query->whereIn('tags.id', $tags);
+            })
+            ->where('status', 1)
+            ->get();
+        }else{
+            $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
+        }
 
         return BusinessListResource::collection($business);
         

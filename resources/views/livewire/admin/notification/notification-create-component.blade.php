@@ -82,7 +82,7 @@
         
                                             <div class="form-group col-md-12">
                                                 <label for="address">Notification Type </label>
-                                                <select  name="notification.repeat_type" wire:model="notification.repeat_type" class="form-control @error('notification.repeat_type') is-invalid @enderror select2" multiple="multiple" style="width: 100%;" >
+                                                <select  name="notification.repeat_type" wire:model="notification.repeat_type" class="form-control @error('notification.repeat_type') is-invalid @enderror">
                                                     <option >Select Notification Type </option>
                                                     @foreach ($repeat_types as $key => $type)
                                                         <option value="{{ $type['key'] }}">{{ $type['value'] }}</option>
