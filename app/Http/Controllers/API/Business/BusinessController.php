@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API\Business;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\API\Business\BusinessDetailsResource;
-use App\Http\Resources\API\Business\BusinessListResource;
 use App\Models\Business;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\API\Business\BusinessListResource;
+use App\Http\Resources\API\Business\BusinessDetailsResource;
+use App\Http\Resources\API\Business\WithoutLoginBusinessListResource;
 
 class BusinessController extends Controller
 {
@@ -19,7 +20,7 @@ class BusinessController extends Controller
     {
         $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
 
-        return BusinessListResource::collection($business);
+        return WithoutLoginBusinessListResource::collection($business);
         
     }
 
