@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Business;
 
 use Livewire\Component;
 use App\Models\Business;
+use App\Models\Tag;
 
 class BusinessCreateComponent extends Component
 {
@@ -11,17 +12,22 @@ class BusinessCreateComponent extends Component
     public Business $business; 
     public $updateMode = false;
     public $contacts;
+    public $tags_id;
     public $i = 1;
 
     protected $rules = [
         'business.company_name' => 'required|min:3',
         'business.owner_name' => 'required',
         'business.address' => 'required',
-        'business.lat' => 'required',
-        'business.long' => 'required',
+        'business.lat' => 'nullable',
+        'business.long' => 'nullable',
+        'business.pincode' => 'nullable',
+        'business.city' => 'required',
+        'business.state' => 'nullable',
         'business.description' => 'required',
         'business.status' => 'nullable',
         'contacts.*' => 'nullable',
+        'tags_id' => 'nullable',
     ];
 
     public function mount($business = null)
@@ -29,6 +35,7 @@ class BusinessCreateComponent extends Component
         if($business){
             $this->business = $business;
             $this->contacts = $this->business->phones()->pluck('phone_number')->toArray();
+            $this->tags_id = $business->tags()->pluck('tags.id')->toArray();
             $this->updateMode = true;
         }else{
             $this->business=new Business();
@@ -70,6 +77,8 @@ class BusinessCreateComponent extends Component
             $this->business->phones()->insert($contactArray);
         }
 
+        $this->business->tags()->sync($this->tags_id);
+
         if($this->updateMode)
         session()->flash('success', 'Business successfully updated.');
         else
@@ -82,7 +91,9 @@ class BusinessCreateComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.business.business-create-component')
+        return view('livewire.admin.business.business-create-component', [
+            'tags' => Tag::where('status', 1)->get()
+        ])
         ->extends('layouts.app')
         ->section('content');
     }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Tag\TagController;
+use App\Http\Controllers\API\Review\ReviewController;
 use App\Http\Controllers\API\Business\BusinessController;
 use App\Http\Controllers\API\Authorization\LoginController;
 
@@ -25,8 +26,10 @@ Route::post('login',                            [LoginController::class, 'store'
 
 Route::get('/tags',                             [TagController::class, 'index'])->name('tags');
 
-Route::get('/businesses',                       [BusinessController::class, 'index'])->name('businesses');
+Route::get('/businesses',                       [BusinessController::class, 'index'])->name('businesses')->middleware('auth:sanctum');
 Route::get('/business/{business}',              [BusinessController::class, 'show'])->name('business.show')->middleware('auth:sanctum');
+
+Route::get('/reviews',                          [ReviewController::class, 'index'])->name('reviews');
 Route::post('/business/review',                 [BusinessController::class, 'store'])->name('business.store')->middleware('auth:sanctum');
 
 Route::post('business/{business}/call_count',   [BusinessController::class, 'call_count'])->name('business.call_count')->middleware('auth:sanctum');

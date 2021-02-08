@@ -17,7 +17,7 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-        $business = Business::with('phones')->where('status', 1)->get();
+        $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
 
         return BusinessListResource::collection($business);
         

@@ -19,6 +19,11 @@ class Business extends Model
         return $this->belongsToMany(\App\Models\Tag::class);
     }
 
+    public function reviews()
+    {
+        return $this->belongsToMany(\App\Models\Review::class, 'review_user')->withPivot('user_id');
+    }
+
     public function business_user()
     {
         return $this->hasMany(\App\Models\BusinessUser::class);

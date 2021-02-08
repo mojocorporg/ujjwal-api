@@ -79,9 +79,48 @@
                                                     </span>
                                                 @enderror
                                             </div>
-        
-        
+
                                             <div class="form-group col-md-12">
+                                                <label for="pincode">Pincode </label>
+                                                <input type="text" wire:model.lazy="business.pincode"
+                                                    class="form-control @error('business.pincode') is-invalid @enderror"
+                                                    name="pincode" value="{{ old('pincode') }}" autocomplete="pincode" autofocus
+                                                    id="pincode" placeholder="Enter Company Pincode">
+                                                @error('business.pincode')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col-md-12">
+                                                <label for="address">State </label>
+                                                <input type="text" wire:model.lazy="business.address"
+                                                    class="form-control @error('business.address') is-invalid @enderror"
+                                                    name="address" value="{{ old('address') }}" autocomplete="address" autofocus
+                                                    id="address" placeholder="Enter Company Address">
+                                                @error('business.address')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col-md-12">
+                                                <label for="city">City </label>
+                                                <input type="text" wire:model.lazy="business.city"
+                                                    class="form-control @error('business.city') is-invalid @enderror"
+                                                    name="city" value="{{ old('city') }}" autocomplete="city" autofocus
+                                                    id="city" placeholder="Enter Company city">
+                                                @error('business.city')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+        
+        
+                                            {{-- <div class="form-group col-md-12">
                                                 <label for="lat">Latitude </label>
                                                 <input type="text" wire:model.lazy="business.lat"
                                                     class="form-control @error('business.lat') is-invalid @enderror"
@@ -105,7 +144,7 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                             
 
                                             <div class="form-group col-md-12">
@@ -129,6 +168,21 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+
+                                            <div class="form-group col-md-12">
+                                                <label for="tags_id">Tags </label>
+                                                <select  name="tags_id" wire:model="tags_id" class="form-control @error('tags_id') is-invalid @enderror select2" multiple="multiple" style="width: 100%;" >
+                                                    @foreach($tags as $tag)
+                                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('tags_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
                                             <table id="myTable" class=" table order-list">
                                                 <thead>
                                                     <tr>
@@ -169,3 +223,15 @@
         </section>
     </div>
 </div>
+
+
+@push('script')
+    <!-- select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".select2").select2();
+        });
+   </script>
+@endpush
