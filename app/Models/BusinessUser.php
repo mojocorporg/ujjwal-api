@@ -9,6 +9,6 @@ class BusinessUser extends Model
 {
     use HasFactory;
 
-    public $fillable = ['user_id', 'business_id', 'call_count', 'share_count', 'feedback'];
+    public $fillable = ['user_id', 'business_id', 'call_count', 'share_count', 'feedback', 'status'];
 
 }

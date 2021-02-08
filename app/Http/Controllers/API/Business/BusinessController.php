@@ -87,10 +87,14 @@ class BusinessController extends Controller
 
         $user_business = $user->business_user();
         
-        if(!$user_business)
-        $user_business->create(['business_id' => $business->id, 'call_count' => 1]);
-        else
-        $user_business->increment('call_count');
+        if(!$user_business){
+            $user_business->create(['business_id' => $business->id, 'call_count' => 1]);
+        }else{
+            $user_business = $user_business->first();
+            $user_business->call_count = $user_business->call_count + 1;
+            $user_business->update();
+        }
+        // $user_business->increment('call_count');
 
         return response()->json(['status' => true, 'message' => 'Business Call Count Updated']);
     }
@@ -103,10 +107,13 @@ class BusinessController extends Controller
 
         $user_business = $user->business_user();
         
-        if($user_business)
-        $user_business->first()->increment('share_count');
-        else
-        $user_business->create(['business_id' => $business->id, 'share_count' => 1]);
+        if($user_business){
+            $user_business = $user_business->first();
+            $user_business->share_count = $user_business->share_count + 1;
+            $user_business->update();
+        }else{
+            $user_business->create(['business_id' => $business->id, 'share_count' => 1]);
+        }
 
         return response()->json(['status' => true, 'message' => 'Business Share Count Updated']);
     }
