@@ -37,3 +37,5 @@ Route::post('/business/review',                 [BusinessController::class, 'sto
 Route::post('business/{business}/call_count',   [BusinessController::class, 'call_count'])->name('business.call_count')->middleware('auth:sanctum');
 Route::post('business/{business}/share_count',  [BusinessController::class, 'share_count'])->name('business.share_count')->middleware('auth:sanctum');
 Route::post('business/{business}/feedback',     [BusinessController::class, 'feedback'])->name('business.feedback')->middleware('auth:sanctum');
+Route::post('business/{business}/review',       [BusinessController::class, 'review'])->name('business.review')->middleware('auth:sanctum');
+

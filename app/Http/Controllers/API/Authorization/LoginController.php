@@ -18,6 +18,7 @@ class LoginController extends Controller
             'token'=> 'sometimes',
             'notification_token'=>'sometimes',
             'notification_token'=>'sometimes',
+            'referral_code' => 'sometimes'
         ]);
 
         $user = User::where('phone_number', $request->phone_number)->first();
@@ -28,7 +29,14 @@ class LoginController extends Controller
             $user->phone_number = $request->phone_number;
             $user->notification_token = $request->notification_token;
             $user->os_type = $request->os_type ? $request->os_type : 'android';
+            $user->referral_code = generateRandomString(6);
             $user->save();
+
+            $referral_user = User::where('referral_code', $request->referral_code)->first();
+            if($request->referral_code && $referral_user){
+                $user->referral_id = $referral_user->id;
+                $user->update();
+            }
 
             $token = $user->createToken($request->phone_number)->plainTextToken;
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Business;
 
 use App\Models\Business;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Business\BusinessListResource;
 use App\Http\Resources\API\Business\BusinessDetailsResource;
@@ -130,6 +131,28 @@ class BusinessController extends Controller
         }
 
         return response()->json(['status' => true, 'message' => 'Business Share Count Updated']);
+    }
+
+
+    public function review(Request $request, Business $business)
+    {
+        $request->validate([
+            'status' => ['required', Rule::in(['accepted', 'rejected'])],
+        ]);
+
+        $user = $request->user();
+
+        $user_business = $user->business_user();
+        
+        if($user_business){
+            $user_business = $user_business->first();
+            $user_business->status = $request->status;
+            $user_business->update();
+        }else{
+            $user_business->create(['business_id' => $business->id, 'status' => $request->status]);
+        }
+
+        return response()->json(['status' => true, 'message' => 'Business Review Updated']);
     }
 
     /**
