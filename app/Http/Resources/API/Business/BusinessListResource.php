@@ -24,6 +24,9 @@ class BusinessListResource extends JsonResource
             'address' => $this->address,
             'owner_name' => $this->owner_name,
             'description' => $this->description,
+            'pincode' => $this->pincode,
+            'city' => $this->city,
+            'state' => $this->state,
             'phones' => $this->phones()->pluck('phone_number')->toArray(),
             'tags' => TagResource::collection($this->tags),
             'reviews' => UserBusinessReviewResource::collection($this->reviews->where('pivot.user_id', $user->id))

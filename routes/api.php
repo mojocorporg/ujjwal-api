@@ -26,7 +26,9 @@ Route::post('login',                            [LoginController::class, 'store'
 
 Route::get('/tags',                             [TagController::class, 'index'])->name('tags');
 
-Route::get('/businesses',                       [BusinessController::class, 'index'])->name('businesses')->middleware('auth:sanctum');
+Route::get('/businesses/without_login',         [BusinessController::class, 'without_login'])->name('businesses.without_login');
+Route::get('/businesses/with_login',            [BusinessController::class, 'with_login'])->name('businesses.with_login')->middleware('auth:sanctum');
+
 Route::get('/business/{business}',              [BusinessController::class, 'show'])->name('business.show')->middleware('auth:sanctum');
 
 Route::get('/reviews',                          [ReviewController::class, 'index'])->name('reviews');

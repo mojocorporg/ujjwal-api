@@ -15,13 +15,23 @@ class BusinessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function without_login(Request $request)
     {
         $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
 
         return BusinessListResource::collection($business);
         
     }
+
+    public function with_login(Request $request)
+    {
+        $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
+
+        return BusinessListResource::collection($business);
+        
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
