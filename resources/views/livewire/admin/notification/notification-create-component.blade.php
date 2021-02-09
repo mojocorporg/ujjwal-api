@@ -69,7 +69,7 @@
 
                                             <div class="form-group col-md-12">
                                                 <label for="icon">Image </label>
-                                                <input type="text" wire:model.lazy="icon"
+                                                <input type="file" wire:model.lazy="icon"
                                                     class="form-control @error('icon') is-invalid @enderror"
                                                     name="icon" value="{{ old('icon') }}" autocomplete="icon" autofocus
                                                     id="icon" >
@@ -95,57 +95,78 @@
                                                 @enderror
                                             </div>
 
+
+
+                                            @if($notification->repeat_type == 'once')
+                                                <div class="form-group col-md-12">
+                                                    <label for="schedule_date">Schedule Date </label>
+                                                    <input type="date" wire:model.lazy="notification.schedule_date"
+                                                        class="form-control @error('notification.schedule_date') is-invalid @enderror"
+                                                        name="schedule_date" value="{{ old('schedule_date') }}" autocomplete="schedule_date" autofocus
+                                                        id="schedule_date" placeholder="Enter Date To Schedule">
+                                                    @error('notification.schedule_date')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            @endif
+                                            @if($notification->repeat_type == 'every_day' || $notification->repeat_type == 'once' || $notification->repeat_type == 'custom_day')
+                                                <div class="form-group col-md-12">
+                                                    <label for="schedule_time">Time </label>
+                                                    <input type="time" wire:model="notification.schedule_time"
+                                                        class="form-control @error('notification.schedule_time') is-invalid @enderror"
+                                                        name="schedule_time" value="{{ old('schedule_time') }}" autocomplete="schedule_time" autofocus
+                                                        id="schedule_time" placeholder="Enter Date To Schedule">
+                                                    @error('notification.schedule_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            @endif
+
+                                            @if($notification->repeat_type == 'custom_day')
                                             <div class="form-group col-md-12">
-                                                <label for="pincode">Pincode </label>
-                                                <input type="text" wire:model.lazy="notification.pincode"
-                                                    class="form-control @error('notification.pincode') is-invalid @enderror"
-                                                    name="pincode" value="{{ old('pincode') }}" autocomplete="pincode" autofocus
-                                                    id="pincode" placeholder="Enter Company Pincode">
-                                                @error('notification.pincode')
+                                                <label for="days">Days </label>
+                                                @foreach ($days as $day)    
+                                                    <div class="form-check">
+                                                        <input wire:model="selected_days" value="{{ $day['key'] }}" class="form-check-input" type="checkbox">
+                                                        <label class="form-check-label">{{ $day['value'] }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            @endif   
+
+                                            <div class="form-group col-md-12">
+                                                <label for="address">Section </label>
+                                                <select  wire:model="notification.section" class="form-control @error('notification.section') is-invalid @enderror">
+                                                    <option >Select Section </option>
+                                                    @foreach ($sections as $key => $type)
+                                                        <option value="{{ $type['key'] }}">{{ $type['value'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('notification.section')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
 
+                                            @if($notification->section == 'business' || $notification->section == 'user_profile')
                                             <div class="form-group col-md-12">
-                                                <label for="address">State </label>
-                                                <input type="text" wire:model.lazy="notification.address"
-                                                    class="form-control @error('notification.address') is-invalid @enderror"
-                                                    name="address" value="{{ old('address') }}" autocomplete="address" autofocus
-                                                    id="address" placeholder="Enter Company Address">
-                                                @error('notification.address')
+                                                <label for="section_id">Section ID </label>
+                                                <input type="number" wire:model="notification.section_id"
+                                                    class="form-control @error('notification.section_id') is-invalid @enderror"
+                                                    name="section_id" value="{{ old('section_id') }}" autocomplete="section_id" autofocus
+                                                    id="section_id" placeholder="Enter Section Id">
+                                                @error('notification.section_id')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-
-                                            <div class="form-group col-md-12">
-                                                <label for="city">City </label>
-                                                <input type="text" wire:model.lazy="notification.city"
-                                                    class="form-control @error('notification.city') is-invalid @enderror"
-                                                    name="city" value="{{ old('city') }}" autocomplete="city" autofocus
-                                                    id="city" placeholder="Enter Company city">
-                                                @error('notification.city')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form-group col-md-12">
-                                                <label for="description">description </label>
-                                                <textarea wire:model.lazy="notification.description"
-                                                    class="form-control @error('notification.description') is-invalid @enderror"
-                                                    name="description" value="{{ old('description') }}" autocomplete="description" autofocus
-                                                    id="description" placeholder="Enter Company description"></textarea>
-                                                @error('notification.description')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
+                                            @endif
 
                                             <div class="form-group col-md-12">
                                                 <label for="status">Status</label>

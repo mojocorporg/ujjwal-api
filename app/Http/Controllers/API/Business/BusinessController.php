@@ -27,11 +27,24 @@ class BusinessController extends Controller
 
     public function with_login(Request $request)
     {
+
+        $request->validate([
+            'tags' => 'sometimes',
+            'city' => 'sometimes',
+        ]);
+        
         if($request->tags){
             $tags = explode(',', $request->tags);
-            $business = Business::with('phones', 'tags', 'reviews')->whereHas('tags', function($query) use($tags){
+            
+            $business = Business::with('phones', 'tags', 'reviews')
+            ->whereHas('tags', function($query) use($tags){
                 $query->whereIn('tags.id', $tags);
             })
+            ->where('status', 1)
+            ->get();
+        }elseif($request->city){
+            $business = Business::with('phones', 'tags', 'reviews')
+            ->where('city', 'LIKE', '%'.$request->city.'%')
             ->where('status', 1)
             ->get();
         }else{
@@ -78,12 +91,12 @@ class BusinessController extends Controller
 
         $reviewArray = [];
         if($request->reviews){
-            foreach($request->reviews as $key => $review){
-                array_push($reviewArray, ['review_id' => $review, 'business_id' => $business->id, 'created_at' => now(), 'updated_at' => now()]);
+            foreach($request->reviews as $review){
+                array_push($reviewArray, ['review_id' => $review, 'user_id' => $user->id, 'created_at' => now(), 'updated_at' => now()]);
             }
         }
 
-        $user->reviews()->where('pivot.user_id', $user->id)->sync($reviewArray);
+        $business->reviews()->where('pivot.user_id', $user->id)->sync($reviewArray);
 
         return response()->json(['status' => true, 'message' => 'Review Added Successfully']);
 

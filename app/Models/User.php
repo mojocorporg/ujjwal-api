@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function reviews()
     {
-        return $this->belongsToMany(\App\Models\Review::class, 'review_user')->withPivot('user_id');
+        return $this->belongsToMany(\App\Models\Review::class, 'review_user')->withPivot('user_id', 'business_id');
     }
 
     public function businesses()

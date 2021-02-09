@@ -43,6 +43,7 @@ class NotificationCreateComponent extends Component
     {
         if($notification){
             $this->notification = $notification;
+            $this->selected_days = $notification->days ? json_decode($notification->days) : [];
             $this->updateMode = true;
         }else{
             $this->notification=new Notification();
@@ -69,9 +70,8 @@ class NotificationCreateComponent extends Component
 
     public $sections = [
     ['key' => 'home', 'value' => 'Home'],
-    ['key' => 'discussion', 'value' => 'Discussion'],
-    ['key' => 'category_post', 'value' => 'Category Post'],
-    ['key' => 'post', 'value' => 'Post'],
+    ['key' => 'my_list', 'value' => 'My List'],
+    ['key' => 'business', 'value' => 'Business'],
     ['key' => 'user_profile', 'value' => 'User Profile'],
     ];
 
@@ -113,7 +113,7 @@ class NotificationCreateComponent extends Component
         session()->flash('success', 'Notification successfully created.');
         $this->updateMode = false;
 
-        // return redirect(route('notification.index'));
+        return redirect(route('notification.index'));
 
     }
 

@@ -63,6 +63,7 @@
                                             <tr>
                                                 <td>{{ $notification->id }}</td>
                                                 <td>{{ $notification->title }}</td>
+                                                <td>{{ $notification->section }}</td>
                                                 <td>{{ $notification->repeat_type }}</td>
                                                 </td>
                                                 @if ($notification->status == 1)
