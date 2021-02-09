@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Business\BusinessListResource;
 use App\Http\Resources\API\Business\BusinessDetailsResource;
+use App\Http\Resources\API\Business\BusinessListResourceCollection;
 use App\Http\Resources\API\Business\WithoutLoginBusinessListResource;
 
 class BusinessController extends Controller
@@ -40,7 +41,7 @@ class BusinessController extends Controller
             $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
         }
 
-        return BusinessListResource::collection($business);
+        return new BusinessListResourceCollection($business);
         
     }
 
