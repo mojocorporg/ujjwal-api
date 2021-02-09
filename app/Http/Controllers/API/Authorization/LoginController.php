@@ -13,7 +13,7 @@ class LoginController extends Controller
     {
         $request->validate([
             'phone_number' => 'required',
-            'username' => 'required',
+            // 'username' => 'required',
             'os_type' => 'required',
             'notification_token'=>'sometimes',
             'referral_code' => 'sometimes'
