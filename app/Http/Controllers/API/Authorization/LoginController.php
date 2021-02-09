@@ -35,6 +35,15 @@ class LoginController extends Controller
                 $user->referral_id = $referral_user->id;
                 $user->update();
             }
+            elseif($request->referral_code){
+                return response()->json([
+                    'token' => null,
+                    'status' => false,
+                    'user_id' => $user->id,
+                    'message' => 'Referral Code Invalid',
+                    'referral_code'=> $user->referral_code
+                ]);
+            }
         }
         else{
             $user->notification_token = $request->notification_token;
@@ -49,6 +58,7 @@ class LoginController extends Controller
             'status' => true,
             'user_id' => $user->id,
             'message' => 'Login successfully',
+            'referral_code'=> $user->referral_code
         ]);
     }
 }
