@@ -29,7 +29,7 @@ class BusinessListResource extends JsonResource
             'state' => $this->state,
             'phones' => $this->phones()->pluck('phone_number')->toArray(),
             'tags' => TagResource::collection($this->tags),
-            'reviews' => UserBusinessReviewResource::collection($this->reviews->where('pivot.user_id', $user->id))
+            'reviews' => $user?UserBusinessReviewResource::collection($this->reviews->where('pivot.user_id', $user->id)):[]
         ];
     }
 }

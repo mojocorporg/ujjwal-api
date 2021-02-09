@@ -51,7 +51,7 @@ class BusinessController extends Controller
 
         $business = Business::with('phones', 'tags', 'reviews')
                     ->whereHas('business_user', function($query) use($user){
-                        $query->where('user_id', $user->id)->where('status', 'accepted');
+                        $query->where('user_id', $user->id)->where('status', 1);
                     })
                     ->where('status', 1)
                     ->get();
@@ -139,10 +139,10 @@ class BusinessController extends Controller
     }
 
 
-    public function mark(Request $request, Business $business)
+    public function add_to_my_list(Request $request, Business $business)
     {
         $request->validate([
-            'status' => ['required', Rule::in(['accepted', 'rejected'])],
+            'status' => ['required', Rule::in(['1', '0'])],
         ]);
 
         $user = $request->user();
@@ -160,14 +160,5 @@ class BusinessController extends Controller
         return response()->json(['status' => true, 'message' => 'Business Review Updated']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }
