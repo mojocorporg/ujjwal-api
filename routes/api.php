@@ -24,16 +24,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login',                            [LoginController::class, 'store']);
 
-Route::get('tags',                             [TagController::class, 'index'])->name('tags');
+Route::get('tags',                              [TagController::class, 'index'])->name('tags');
 
-Route::get('businesses',         [BusinessController::class, 'index']);
+Route::get('businesses',                        [BusinessController::class, 'index']);
 // Route::get('/businesses/with_login',            [BusinessController::class, 'with_login'])->name('businesses.with_login')->middleware('auth:sanctum');
-Route::get('businesses/my_list',              [BusinessController::class, 'my_list'])->middleware('auth:sanctum');
+Route::get('businesses/my_list',                [BusinessController::class, 'my_list'])->middleware('auth:sanctum');
 
 // Route::get('business/{business}',              [BusinessController::class, 'show'])->name('business.show')->middleware('auth:sanctum');
 
-Route::get('reviews',                          [ReviewController::class, 'index'])->name('reviews');
-Route::post('business/review',                 [ReviewController::class, 'store'])->middleware('auth:sanctum');
+Route::get('reviews',                           [ReviewController::class, 'index'])->name('reviews');
+Route::post('business/review',                  [ReviewController::class, 'store'])->middleware('auth:sanctum');
 
 
 Route::post('business/{business}/call_count',   [BusinessController::class, 'call_count'])->middleware('auth:sanctum');
