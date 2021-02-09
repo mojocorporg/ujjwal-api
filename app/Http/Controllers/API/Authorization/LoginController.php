@@ -15,8 +15,6 @@ class LoginController extends Controller
             'phone_number' => 'required',
             'username' => 'required',
             'os_type' => 'required',
-            'token'=> 'sometimes',
-            'notification_token'=>'sometimes',
             'notification_token'=>'sometimes',
             'referral_code' => 'sometimes'
         ]);
@@ -37,23 +35,19 @@ class LoginController extends Controller
                 $user->referral_id = $referral_user->id;
                 $user->update();
             }
-
-            $token = $user->createToken($request->phone_number)->plainTextToken;
-
-            return response()->json([
-                'token' => $token,
-                'status' => true,
-                'message' => 'Login successfully',
-            ]);
         }
-        $user->notification_token = $request->notification_token;
-        $user->os_type = $request->os_type;
-        $user->update();
+        else{
+            $user->notification_token = $request->notification_token;
+            $user->os_type = $request->os_type;
+            $user->update();
+        }
+
         $token = $user->createToken($request->phone_number)->plainTextToken;
 
         return response()->json([
             'token' => $token,
             'status' => true,
+            'user_id' => $user->id,
             'message' => 'Login successfully',
         ]);
     }
