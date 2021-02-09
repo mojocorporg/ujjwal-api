@@ -23,24 +23,23 @@ class BusinessController extends Controller
             'city' => 'sometimes',
         ]);
         
-        if($request->tags){
-            $tags = explode(',', $request->tags);
-            
-            $business = Business::with('phones', 'tags', 'reviews')
-            ->whereHas('tags', function($query) use($tags){
-                $query->whereIn('tags.id', $tags);
-            })
-            ->where('status', 1)
-            ->get();
-        }elseif($request->city){
-            $business = Business::with('phones', 'tags', 'reviews')
-            ->where('city', 'LIKE', '%'.$request->city.'%')
-            ->where('status', 1)
-            ->get();
-        }else{
-            $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
-        }
+        $business=collect();
+        $business = Business::with('phones', 'tags', 'reviews')->where('status', 1);
+        
+        if($business){
 
+        if($request->tags){
+            $tags = explode(',', $request->tags);    
+            $business->whereHas('tags', function($query) use($tags){
+                $query->whereIn('tags.id', $tags);
+            });
+        }
+        if($request->city){
+            $business->where('city', 'LIKE', '%'.$request->city.'%');
+        }
+        $business=$business->get();
+        } 
+        
         return new BusinessListResourceCollection($business);
         
     }
