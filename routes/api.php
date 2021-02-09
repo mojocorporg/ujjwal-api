@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login',                            [LoginController::class, 'store']);
+Route::post('update_name',                       [UserController::class, 'update']);
 
 Route::get('tags',                              [TagController::class, 'index'])->name('tags');
 

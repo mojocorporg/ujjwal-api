@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         if (!$user) {
             $user = new User();
-            $user->name = $request->username??'USER-'.generateRandomString(4);
+            // $user->name = $request->username??'USER-'.generateRandomString(4);
             $user->phone_number = $request->phone_number;
             $user->notification_token = $request->notification_token;
             $user->os_type = $request->os_type ? $request->os_type : 'android';
