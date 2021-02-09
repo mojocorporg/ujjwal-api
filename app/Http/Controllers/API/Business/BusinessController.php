@@ -12,23 +12,12 @@ use App\Http\Resources\API\Business\WithoutLoginBusinessListResource;
 
 class BusinessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function without_login(Request $request)
-    {
-        $business = Business::with('phones', 'tags', 'reviews')->where('status', 1)->get();
 
-        return WithoutLoginBusinessListResource::collection($business);
-        
-    }
-
-    public function with_login(Request $request)
+    public function index(Request $request)
     {
 
         $request->validate([
+            'user_id' => 'sometimes',
             'tags' => 'sometimes',
             'city' => 'sometimes',
         ]);
@@ -56,7 +45,7 @@ class BusinessController extends Controller
     }
 
 
-    public function accepted(Request $request)
+    public function my_list(Request $request)
     {
         $user = $request->user();
 
@@ -72,36 +61,7 @@ class BusinessController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'business_id' => 'required',
-            'reviews' => 'sometimes'
-        ]);
-
-        $user = $request->user();
-
-        $business = Business::find($request->business_id);
-
-        $reviewArray = [];
-        if($request->reviews){
-            foreach($request->reviews as $review){
-                array_push($reviewArray, ['review_id' => $review, 'user_id' => $user->id, 'created_at' => now(), 'updated_at' => now()]);
-            }
-        }
-
-        $business->reviews()->where('pivot.user_id', $user->id)->sync($reviewArray);
-
-        return response()->json(['status' => true, 'message' => 'Review Added Successfully']);
-
-    }
-
+   
     /**
      * Display the specified resource.
      *
@@ -133,7 +93,6 @@ class BusinessController extends Controller
         }else{
             $user_business->create(['business_id' => $business->id, 'call_count' => 1]);
         }
-        // $user_business->increment('call_count');
 
         return response()->json(['status' => true, 'message' => 'Business Call Count Updated']);
     }
