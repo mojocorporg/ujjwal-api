@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Tag\TagController;
 use App\Http\Controllers\API\Review\ReviewController;
 use App\Http\Controllers\API\Business\BusinessController;
