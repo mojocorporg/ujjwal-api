@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Notification;
 use Livewire\Component;
 use App\Models\Notification;
 use Livewire\WithFileUploads;
+use App\Jobs\Notification\ScheduledNotificationProcessJob;
 
 class NotificationCreateComponent extends Component
 {
@@ -101,9 +102,9 @@ class NotificationCreateComponent extends Component
             ->toMediaCollection('notifications');
         }
 
-        // if($this->notification->repeat_type == 'now'){
-        //     ScheduledNotificationProcessJob::dispatch([], $this->notification)->onQueue('notify');
-        // }
+        if($this->notification->repeat_type == 'now'){
+            ScheduledNotificationProcessJob::dispatch([], $this->notification)->onQueue('notify');
+        }
 
         $this->show_form=false;
         $this->icon=null;

@@ -25,9 +25,16 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                 <i class="fas fa-th-large"></i>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#" role="button">
+                <i class="fas fa-power-off"></i>
             </a>
         </li>
     </ul>

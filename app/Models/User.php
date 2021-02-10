@@ -63,5 +63,9 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\BusinessUser::class);
     }
 
+    public function referrals()
+    {
+        return $this->hasMany(\App\Models\User::class, 'referral_id');
+    }
 
 }

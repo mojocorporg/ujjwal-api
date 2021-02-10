@@ -17,7 +17,7 @@ class BusinessListResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = $request->user();
+        $user_id = $request->user_id;
         return [
             'id' => $this->id,
             'company_name' => $this->company_name,
@@ -29,7 +29,7 @@ class BusinessListResource extends JsonResource
             'state' => $this->state,
             'phones' => $this->phones()->pluck('phone_number')->toArray(),
             'tags' => TagResource::collection($this->tags),
-            'reviews' => $user?UserBusinessReviewResource::collection($this->reviews->where('pivot.user_id', $user->id)):[]
+            'reviews' => $user_id?UserBusinessReviewResource::collection($this->reviews->where('pivot.user_id', $user_id)):[]
         ];
     }
 }

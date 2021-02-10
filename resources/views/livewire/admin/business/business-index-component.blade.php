@@ -42,6 +42,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">{{ $module }} Table</h3>
+                                <a href="{{ route('business.import') }}" class="btn btn-flat btn-success float-right"> Import Business</a>
                                 <a href="{{ route('business.create') }}" class="btn btn-flat btn-secondary float-right"> <i
                                         class="fas fa-plus"></i> New {{ $module }}</a>
                             </div>
@@ -54,7 +55,7 @@
                                             <th>Company Name</th>
                                             <th>Owner Name</th>
                                             <th>Address</th>
-                                            <th>Status</th>
+                                            {{-- <th>Status</th> --}}
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -67,11 +68,11 @@
                                                 <td>{{ $business->address }}</td>
                                                 {{-- <td>{{ \Carbon\Carbon::parse($business->created_at)->format('d-m-Y') }} --}}
                                                 </td>
-                                                @if ($business->status == 1)
+                                                {{-- @if ($business->status == 1)
                                                     <td><span class="tag tag-success">Active</span></td>
                                                 @else
                                                     <td><span class="tag tag-success">Inactive</span></td>
-                                                @endif
+                                                @endif --}}
                                                 <td>
                                                     <a href="{{ route('business.edit', ['business' => $business->id]) }}"
                                                         class="btn btn-sm btn-flat btn-primary"><i class="fa fa-eye"
@@ -85,7 +86,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $businesses->links() }}
+                                {{ $businesses->links('pagination::bootstrap-4') }}
                             </div>
                             <!-- /.card-body -->
                         </div>

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+use App\Models\Rule;
 
 function generateRandomString($length = 20) {
     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -8,6 +10,13 @@ function generateRandomString($length = 20) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+function rules() {
+    if($rules = Rule::first())
+    return $rules;
+    else
+    return [];
 }
 
 ?>

@@ -10,6 +10,7 @@ use App\Http\Resources\API\Business\BusinessListResource;
 use App\Http\Resources\API\Business\BusinessDetailsResource;
 use App\Http\Resources\API\Business\BusinessListResourceCollection;
 use App\Http\Resources\API\Business\WithoutLoginBusinessListResource;
+use App\Models\User;
 
 class BusinessController extends Controller
 {
@@ -22,6 +23,15 @@ class BusinessController extends Controller
             'tags' => 'sometimes',
             'city' => 'sometimes',
         ]);
+
+        $show_count = 5;
+        $rules = rules();
+        if($request->user_id > 0 && $rules){
+            $referral = User::find($request->user_id)->referrals()->count();
+            $show_count = $rules->with_login + $referral;
+        }elseif($rules){
+            $show_count = $rules->without_login;
+        }
         
         $business=collect();
         $business = Business::with('phones', 'tags', 'reviews')->where('status', 1);
@@ -37,7 +47,7 @@ class BusinessController extends Controller
         if($request->city){
             $business->where('city', 'LIKE', '%'.$request->city.'%');
         }
-        $business=$business->get();
+        $business=$business->take($show_count)->get();
         } 
         
         return new BusinessListResourceCollection($business);

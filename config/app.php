@@ -56,6 +56,9 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'schedule_frequency' => env('SCHEDULE_FREQUENCY', 15),
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -176,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        LaravelFCM\FCMServiceProvider::class,
 
     ],
 
@@ -229,7 +234,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => App\Helpers\Helper::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'FCM'      => LaravelFCM\Facades\FCM::class,
     ],
 
 ];

@@ -9,6 +9,19 @@ class Business extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'company_name',
+        'owner_name',
+        'description',
+        'address',
+        'pincode',
+        'city',
+        'state',
+        'lat',
+        'long',
+        'status'
+    ];
+
     public function phones()
     {
         return $this->hasMany(\App\Models\BusinessPhone::class, 'business_id');

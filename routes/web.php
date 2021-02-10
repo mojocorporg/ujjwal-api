@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tag\TagComponent;
 use App\Http\Livewire\Admin\Rule\RulesComponent;
 use App\Http\Livewire\Admin\Review\ReviewComponent;
+use App\Http\Controllers\Admin\Business\BusinessController;
 use App\Http\Livewire\Admin\Business\BusinessIndexComponent;
+use App\Http\Livewire\Authorization\ChangePasswordComponent;
 use App\Http\Livewire\Admin\Business\BusinessCreateComponent;
 use App\Http\Livewire\Admin\Notification\NotificationIndexComponent;
 use App\Http\Livewire\Admin\Notification\NotificationCreateComponent;
@@ -38,3 +40,13 @@ Route::get('notification/create',               NotificationCreateComponent::cla
 Route::get('notification/{notification}/edit',  NotificationCreateComponent::class)->name('notification.edit');
 
 Route::get('review',                            ReviewComponent::class)->name('review');
+
+
+// Import Excel Route 
+Route::view('business-import',                 'business.import')->name('business.import');
+Route::post('business/import',                  [BusinessController::class, 'import'])->name('import.business');
+
+// Export Excel Route
+Route::get('business/export',                   [BusinessController::class, 'export'])->name('export.business');
+    
+Route::get('change/password',                   ChangePasswordComponent::class)->name('change.password');
