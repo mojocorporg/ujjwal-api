@@ -40,7 +40,7 @@ class LoginController extends Controller
                     'token' => null,
                     'status' => false,
                     'user_id' => $user->id,
-                    'user_name'=>''
+                    'user_name'=>'',
                     'message' => 'Referral Code Invalid',
                     'referral_code'=> $user->referral_code
                 ]);
