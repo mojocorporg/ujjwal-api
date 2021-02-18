@@ -14,7 +14,9 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ route('change.password') }}" class="d-block">Alexander Pierce</a>
+                @if(Auth::user())
+                <a href="{{ route('change.password') }}" class="d-block">{{ Auth::user()->name }}</a>
+                @endif
             </div>
         </div>
 
