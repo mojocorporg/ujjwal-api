@@ -18,6 +18,8 @@ class BusinessCreateComponent extends Component
     protected $rules = [
         'business.company_name' => 'required|min:3',
         'business.owner_name' => 'required',
+        'business.designation' => 'nullable',
+        'business.email' => 'nullable',
         'business.address' => 'required',
         'business.lat' => 'nullable',
         'business.long' => 'nullable',

@@ -42,11 +42,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group col-md-12">
-                                                <label for="company_name">Company Name </label>
+                                                <label for="company_name">Business Name </label>
                                                 <input type="text" wire:model.lazy="business.company_name"
                                                     class="form-control @error('business.company_name') is-invalid @enderror"
                                                     name="company_name" value="{{ old('company_name') }}" autocomplete="company_name" autofocus
-                                                    id="company_name" placeholder="Enter Name Of Company">
+                                                    id="company_name" placeholder="Enter Name Of Business">
                                                 @error('business.company_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -61,6 +61,32 @@
                                                     name="owner_name" value="{{ old('owner_name') }}" autocomplete="owner_name" autofocus
                                                     id="owner_name" placeholder="Enter Company Owner Name">
                                                 @error('business.owner_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col-md-12">
+                                                <label for="email">Email </label>
+                                                <input type="text" wire:model.lazy="business.email"
+                                                    class="form-control @error('business.email') is-invalid @enderror"
+                                                    name="email" value="{{ old('email') }}" autocomplete="email" autofocus
+                                                    id="email" placeholder="Enter Email Address">
+                                                @error('business.email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col-md-12">
+                                                <label for="designation">Designation </label>
+                                                <input type="text" wire:model.lazy="business.designation"
+                                                    class="form-control @error('business.designation') is-invalid @enderror"
+                                                    name="designation" value="{{ old('designation') }}" autocomplete="designation" autofocus
+                                                    id="designation" placeholder="Enter Designation">
+                                                @error('business.designation')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -148,8 +174,8 @@
                                             
 
                                             <div class="form-group col-md-12">
-                                                <label for="description">description </label>
-                                                <textarea wire:model.lazy="business.description"
+                                                <label for="description">Nature Of Trade </label>
+                                                <textarea wire:model="business.description"
                                                     class="form-control @error('business.description') is-invalid @enderror"
                                                     name="description" value="{{ old('description') }}" autocomplete="description" autofocus
                                                     id="description" placeholder="Enter Company description"></textarea>
@@ -194,7 +220,7 @@
                                                     @foreach ($contacts as $key => $contact)
                                                     <tr>
                                                         <td class="col-md-4">
-                                                            <input type="number" wire:model="contacts.{{$key}}" class="form-control" />
+                                                            <input type="text" maxlength="12" wire:model="contacts.{{$key}}" class="form-control" />
                                                         </td>
                                                         <td class="col-md-2">
                                                             <a  wire:click="removeRow({{$key}})" class="btn btn-danger btn-sm">Delete</a>

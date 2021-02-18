@@ -42,7 +42,7 @@
                                     <div class="card-body animated fadeIn delay-1s">
                                         <div class="form-group col-md-6">
                                             <label for="title">Title </label>
-                                            <input type="text" wire:model.lazy="review.title"
+                                            <input type="text" wire:model="review.title"
                                                 class="form-control @error('review.title') is-invalid @enderror"
                                                 name="title" value="{{ old('title') }}" autocomplete="title" autofocus
                                                 id="title" placeholder="Enter Title Of Review">

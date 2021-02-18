@@ -15,17 +15,20 @@ class BusinessSampleExport implements FromCollection, WithHeadings
     {
         return collect([
             [
+            'Lucy',
+            'Cechtelar',
+            'Manager',
+            '+917113456789, +917145679876, +917115456466',
+            'lucy.cechtelar@bogan.in',
             'Bogan-Treutel',
-            'Lucy Cechtelar',
             'Dolores sit sint laboriosam dolorem culpa et autem. Beatae nam sunt fugit',
             '426 Jordy Lodge Cartwrightshire, SC 88120-6700',
-            '17916',
-            'West Judge',
             'NewMexico',
+            'West Judge',
+            '17916',
             '77.147489',
             '86.211205',
             '1',
-            '+917113456789, +917145679876, +917115456466',
             'porro, sed, magni'
             ]
         ]);
@@ -34,17 +37,20 @@ class BusinessSampleExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Company Name',
-            'Owner Name', 
-            'Description',
+            'First Name', 
+            'Last Name', 
+            'Designation',
+            'Contact Numbers',
+            'Email',
+            'Business Name',
+            'Nature of Trade',
             'Address',
-            'Pincode',
             'City',
             'State',
+            'Pincode',
             'Lat',
             'Long',
             'Status',
-            'Contact Numbers',
             'Tags'
         ];
     }

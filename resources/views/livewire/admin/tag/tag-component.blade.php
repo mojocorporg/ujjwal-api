@@ -42,7 +42,7 @@
                                     <div class="card-body animated fadeIn delay-1s">
                                         <div class="form-group col-md-6">
                                             <label for="name">Name </label>
-                                            <input type="text" wire:model.lazy="tag.name"
+                                            <input type="text" wire:model="tag.name"
                                                 class="form-control @error('tag.name') is-invalid @enderror"
                                                 name="name" value="{{ old('name') }}" autocomplete="name" autofocus
                                                 id="name" placeholder="Enter Name Of Tag">

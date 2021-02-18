@@ -41,7 +41,6 @@ Route::get('notification/{notification}/edit',  NotificationCreateComponent::cla
 
 Route::get('review',                            ReviewComponent::class)->name('review');
 
-
 // Import Excel Route 
 Route::view('business-import',                 'business.import')->name('business.import');
 Route::post('business/import',                  [BusinessController::class, 'import'])->name('import.business');

@@ -11,6 +11,8 @@ class Business extends Model
 
     public $fillable = [
         'company_name',
+        'designation',
+        'email',
         'owner_name',
         'description',
         'address',

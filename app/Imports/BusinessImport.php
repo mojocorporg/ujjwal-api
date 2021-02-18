@@ -23,15 +23,16 @@ class BusinessImport implements ToModel, WithHeadingRow, WithValidation
     */
     public function model(array $row)
     {
-        \Log::info($row);
         $business = Business::create([
-            'company_name' => $row['company_name'],
-            'owner_name' => $row['owner_name'],
-            'description' => $row['description'],
+            'owner_name' => $row['first_name'].' '.$row['last_name'],
+            'designation' => $row['designation'],
+            'email' => $row['email'],
+            'company_name' => $row['business_name'],
+            'description' => $row['nature_of_trade'],
             'address' => $row['address'],
-            'pincode' => $row['pincode'],
             'city' => $row['city'],
             'state' => $row['state'],
+            'pincode' => $row['pincode'],
             'lat' => $row['lat'],
             'long' => $row['long'],
             'status' => $row['status'],
@@ -52,27 +53,27 @@ class BusinessImport implements ToModel, WithHeadingRow, WithValidation
         }
 
         if($row['contact_numbers']){
-            $syncData = [];
-            $index = 0;
             $contact_numbers = explode(",", $row['contact_numbers']);
+            \Log::info($contact_numbers);
             $contactArray = [];
                 foreach($contact_numbers as $key => $contact){
-                array_push($contactArray, ['business_id' => $business->id, 'phone_number' => $contact]);
+                    $contactArray[$key] = ['business_id' => $business->id, 'phone_number' => $contact];
                 }
-            $business->phones()->insert($syncData);
+            \Log::info($contactArray);
+            $business->phones()->insert($contactArray);
         }
     }
 
     public function rules(): array
     {
         return [
-            'company_name' => 'required|string|max:255',
-            'owner_name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'business_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'nature_of_trade' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
             'pincode' => 'required|max:255',
             'city' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
+            'state' => 'nullable|string|max:255',
             'lat' => 'nullable',
             'long' => 'nullable',
             'status' => ['required', Rule::in([ 0, 1])],
