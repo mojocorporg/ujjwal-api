@@ -54,12 +54,10 @@ class BusinessImport implements ToModel, WithHeadingRow, WithValidation
 
         if($row['contact_numbers']){
             $contact_numbers = explode(",", $row['contact_numbers']);
-            \Log::info($contact_numbers);
             $contactArray = [];
                 foreach($contact_numbers as $key => $contact){
                     $contactArray[$key] = ['business_id' => $business->id, 'phone_number' => $contact];
                 }
-            \Log::info($contactArray);
             $business->phones()->insert($contactArray);
         }
     }
