@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tag\TagComponent;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Livewire\Admin\User\UserComponent;
 use App\Http\Livewire\Admin\Rule\RulesComponent;
 use App\Http\Livewire\Admin\Review\ReviewComponent;
 use App\Http\Controllers\Admin\Business\BusinessController;
@@ -32,7 +33,9 @@ Auth::routes();
 Route::get('logout',                           [LoginController::class, 'logout'])->name('logout');
 
 
+
 Route::get('/home',                             [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user',                             UserComponent::class)->name('user');
 Route::get('/tag',                              TagComponent::class)->name('tag');
 Route::get('/business',                         BusinessIndexComponent::class)->name('business');
 Route::get('/business/create',                  BusinessCreateComponent::class)->name('business.create');

@@ -12,6 +12,16 @@
         </li>
 
         <li class="nav-item">
+            <a href="{{ route('user') }}" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                    User
+                </p>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
             <a href="{{ route('tag') }}" class="nav-link">
                 <i class="nav-icon fas fa-tags"></i>
                 <p>
