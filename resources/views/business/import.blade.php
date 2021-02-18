@@ -50,7 +50,7 @@
                                 <div class="col-sm-6 col-md-6">
                                     <b>Select .xlsx file for Import</b>
                                     <p>(Note : Column Format for Import Should be : )</p>
-                                    <b> |  Company Name  | Owner Name |  Description  |  Address  |  Pincode |  City  | State |  Lat  | Long | Status | Contact Numbers | Tags </b>
+                                    <b> | First Name | Last Name | Designation | Contact Numbers |  Email | Business Name  |  Nature of Trade | Addres |  City  | State | Pincode  |  Lat  | Long | Status | Tags </b>
                                     <br>
                                     <div class="form-wrap mt-10">
                                         <a href="{{route('export.business') }}" class="btn btn-success btn-sm">Download Sample File</a>
