@@ -13,14 +13,22 @@
   <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <style>
+    body {
+ /* background-image: url("/images/planner_bg.jpg")!important; */
+ /* background-repeat: no-repeat!important; */
+ background-size: cover!important;
+ background-color: #373a4c!important;
+}
+  </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ url('/') }}"><b>{{ config('app.name') }}</a>
+    <a style="color: white" href="{{ url('/') }}"><b>{{ config('app.name') }}</a>
   </div>
   <!-- /.login-logo -->
-  <div class="card">
+  <div class="card" style="border:2px solid#ffffff;border-radius: 8px;box-shadow:0 0 0px rgb(0 0 0 / 0%), 0 0px 0px rgb(0 0 0 / 0%)!important">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
@@ -64,7 +72,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
+            <button type="submit" class="btn btn-danger btn-block">{{ __('Login') }}</button>
           </div>
           <!-- /.col -->
         </div>
@@ -73,7 +81,7 @@
 
       @if (Route::has('password.request'))
       <p class="mb-1">
-        <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+        <a class="text-danger" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
       </p>
       @endif
     </div>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Business;
+use App\Models\BusinessUser;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $total_users=User::count();
+        $total_businesses=Business::count();
+        $total_calls=BusinessUser::sum('call_count');
+        $total_referrals=User::where('referral_id','!=',null)->count();
+        
+        return view('home',compact('total_users','total_businesses','total_calls','total_referrals'));
     }
 }
