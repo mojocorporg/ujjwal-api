@@ -15,26 +15,27 @@
             <a href="{{ route('user') }}" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                    User
+                    Users
                 </p>
             </a>
         </li>
 
-
-        <li class="nav-item">
-            <a href="{{ route('tag') }}" class="nav-link">
-                <i class="nav-icon fas fa-tags"></i>
-                <p>
-                    Tag
-                </p>
-            </a>
-        </li>
 
         <li class="nav-item">
             <a href="{{ route('business') }}" class="nav-link">
                 <i class="nav-icon fas fa-building"></i>
                 <p>
-                    Business
+                    Businesss
+                </p>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a href="{{ route('notification.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-bell"></i>
+                <p>
+                    Notifications
                 </p>
             </a>
         </li>
@@ -48,20 +49,21 @@
             </a>
         </li>
 
+
         <li class="nav-item">
-            <a href="{{ route('notification.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-bell"></i>
+            <a href="{{ route('tag') }}" class="nav-link">
+                <i class="nav-icon fas fa-tags"></i>
                 <p>
-                    Notification
+                    Business Tags
                 </p>
             </a>
         </li>
 
         <li class="nav-item">
             <a href="{{ route('review') }}" class="nav-link">
-                <i class="nav-icon fas fa-bell"></i>
+                <i class="nav-icon fas fa-check-square"></i>
                 <p>
-                  Review
+                  Review Tags
                 </p>
             </a>
         </li>
