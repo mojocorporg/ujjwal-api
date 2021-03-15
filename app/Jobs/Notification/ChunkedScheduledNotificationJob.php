@@ -89,7 +89,7 @@ class ChunkedScheduledNotificationJob implements ShouldQueue
             // }
             $payload = $dataBuilder->build();
             if($user->notification_token) {
-                 SendSingleNotificationJob::dispatch($user, $payload)->onQueue('notify')->delay($delay);
+                 SendSingleNotificationJob::dispatch($user, $payload)->delay($delay)->onQueue('notify');
             }
 
         }
@@ -159,8 +159,6 @@ class ChunkedScheduledNotificationJob implements ShouldQueue
             $payload = $dataBuilder->build();
 
             $all_tokens = $this->chunkUsersData->pluck('notification_token');
-            \Log::info($all_tokens);
-            \Log::info(json_encode($payload));
 
             foreach($all_tokens->chunk(1000) as $key =>  $tokens){
                 CommonBulkNotificationJob::dispatch($tokens->toArray(),$payload)->onQueue('notify')->delay(now()->addSeconds($key * 5));

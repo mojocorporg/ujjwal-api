@@ -31,11 +31,7 @@ return [
     'connections' => [
 
         'sync' => [
-            'driver' => 'redis',
-            'connection' => 'default',
-            'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
-            'block_for' => null,
+            'driver' => 'sync',
         ],
 
         'database' => [
