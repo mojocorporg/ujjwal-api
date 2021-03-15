@@ -103,7 +103,7 @@ class NotificationCreateComponent extends Component
         }
 
         if($this->notification->repeat_type == 'now'){
-            ScheduledNotificationProcessJob::dispatch([], $this->notification)->onQueue('notify');
+            ScheduledNotificationProcessJob::dispatch([], $this->notification)->onConnection('default')->onQueue('notify')->delay(now()->addSecond(1));
         }
 
         $this->show_form=false;
