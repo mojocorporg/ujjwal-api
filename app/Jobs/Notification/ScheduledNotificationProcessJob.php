@@ -41,7 +41,7 @@ class ScheduledNotificationProcessJob implements ShouldQueue
     
         if (isset($users_data) && count($users_data) > 0) {
             foreach ($users_data->chunk(1000) as $key => $chunkUsersData) {
-                ChunkedScheduledNotificationJob::dispatch($chunkUsersData, $notification_data)->onQueue('notify')->delay(now()->addSeconds($key + 5));
+                ChunkedScheduledNotificationJob::dispatch($chunkUsersData, $notification_data)->onConnection('default')->onQueue('notify')->delay(now()->addSeconds($key + 5));
             }
         }
     }
