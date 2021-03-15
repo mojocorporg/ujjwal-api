@@ -90,7 +90,7 @@ class SendScheduleNotificationCommand extends Command
                         $time_data = $this->calculateTimeDiff($notification->schedule_time);
                         if ($time_data['send_notification']) {
                             $this->info("scheduling  Notification ONCE" . $notification->title . " for process " . $time_data['delay'] . " seconds delay");
-                            ScheduledNotificationProcessJob::dispatch($notification->filter_data, $notification)->onQueue('default')->delay(now()->addSeconds($time_data['delay']));
+                            ScheduledNotificationProcessJob::dispatch($notification->filter_data, $notification)->onQueue('notify')->delay(now()->addSeconds($time_data['delay']));
                         }
                         $this->info("once no due");
                     }
@@ -101,7 +101,7 @@ class SendScheduleNotificationCommand extends Command
                     $this->info("everyday check");
                     if ($time_data['send_notification']) {
                         $this->info("scheduling  Notification EVERY DAY" . $notification->title . " for process " . $time_data['delay'] . " seconds delay");
-                        ScheduledNotificationProcessJob::dispatch($notification->filter_data, $notification)->onQueue('default')->delay(now()->addSeconds($time_data['delay']));
+                        ScheduledNotificationProcessJob::dispatch($notification->filter_data, $notification)->onQueue('notify')->delay(now()->addSeconds($time_data['delay']));
                     }
                     $this->info("everyday no due");
                     break;
@@ -123,7 +123,7 @@ class SendScheduleNotificationCommand extends Command
                         if ($time_data['send_notification']) {
 
                             $this->info("scheduling CUSTOM DAYS" . $notification->title . " for process " . $time_data['delay'] . " seconds delay");
-                            ScheduledNotificationProcessJob::dispatch($notification->filter_data, $notification)->onQueue('default')->delay(now()->addSeconds($time_data['delay']));
+                            ScheduledNotificationProcessJob::dispatch($notification->filter_data, $notification)->onQueue('notify')->delay(now()->addSeconds($time_data['delay']));
                         }
                         $this->info("custom day no due");
                     }
