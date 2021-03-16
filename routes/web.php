@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Admin\Tag\TagComponent;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Livewire\Admin\User\UserComponent;
@@ -24,35 +26,33 @@ use App\Http\Livewire\Admin\Notification\NotificationCreateComponent;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::get('logout',                           [LoginController::class, 'logout'])->name('logout');
 
-
-
-Route::get('/home',                             [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/user',                             UserComponent::class)->name('user');
-Route::get('/tag',                              TagComponent::class)->name('tag');
-Route::get('/business',                         BusinessIndexComponent::class)->name('business');
-Route::get('/business/create',                  BusinessCreateComponent::class)->name('business.create');
-Route::get('/business/{business}/edit',         BusinessCreateComponent::class)->name('business.edit');
-
-Route::get('rules',                             RulesComponent::class)->name('rules.update');
-Route::get('notification',                      NotificationIndexComponent::class)->name('notification.index');
-Route::get('notification/create',               NotificationCreateComponent::class)->name('notification.create');
-Route::get('notification/{notification}/edit',  NotificationCreateComponent::class)->name('notification.edit');
-
-Route::get('review',                            ReviewComponent::class)->name('review');
-
-// Import Excel Route 
-Route::view('business-import',                 'business.import')->name('business.import');
-Route::post('business/import',                  [BusinessController::class, 'import'])->name('import.business');
-
-// Export Excel Route
-Route::get('business/export',                   [BusinessController::class, 'export'])->name('export.business');
+Route::group(['middleware'=>'auth'],function () {
+    // Route::get('/', function () {return view('welcome');});
+    Route::get('/',                             [HomeController::class, 'index'])->name('home');
+    Route::get('/user',                             UserComponent::class)->name('user');
+    Route::get('/tag',                              TagComponent::class)->name('tag');
+    Route::get('/business',                         BusinessIndexComponent::class)->name('business');
+    Route::get('/business/create',                  BusinessCreateComponent::class)->name('business.create');
+    Route::get('/business/{business}/edit',         BusinessCreateComponent::class)->name('business.edit');
     
-Route::get('change/password',                   ChangePasswordComponent::class)->name('change.password');
+    Route::get('rules',                             RulesComponent::class)->name('rules.update');
+    Route::get('notification',                      NotificationIndexComponent::class)->name('notification.index');
+    Route::get('notification/create',               NotificationCreateComponent::class)->name('notification.create');
+    Route::get('notification/{notification}/edit',  NotificationCreateComponent::class)->name('notification.edit');
+    
+    Route::get('review',                            ReviewComponent::class)->name('review');
+    
+    // Import Excel Route 
+    Route::view('business-import',                 'business.import')->name('business.import');
+    Route::post('business/import',                  [BusinessController::class, 'import'])->name('import.business');
+    
+    // Export Excel Route
+    Route::get('business/export',                   [BusinessController::class, 'export'])->name('export.business');
+        
+    Route::get('change/password',                   ChangePasswordComponent::class)->name('change.password');
+});

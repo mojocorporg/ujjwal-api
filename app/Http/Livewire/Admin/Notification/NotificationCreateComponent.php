@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Notification;
 
+use App\Jobs\Notification\CommonBulkNotificationJob;
 use Livewire\Component;
 use App\Models\Notification;
 use Livewire\WithFileUploads;
@@ -103,6 +104,7 @@ class NotificationCreateComponent extends Component
         }
 
         if($this->notification->repeat_type == 'now'){
+            // CommonBulkNotificationJob::dispatch([], $this->notification)->onQueue('notify');
             ScheduledNotificationProcessJob::dispatch([], $this->notification)->onQueue('notify');
         }
 

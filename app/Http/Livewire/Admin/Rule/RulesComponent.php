@@ -15,6 +15,8 @@ class RulesComponent extends Component
         'rule.without_login' => 'required',
         'rule.with_login' => 'required',
         'rule.on_referral' => 'required',
+        'rule.price' => 'required',
+        'rule.on_payment' => 'required',
     ];
 
     public function mount()

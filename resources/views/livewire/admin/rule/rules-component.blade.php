@@ -91,6 +91,34 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <hr>
+                                            <h5>Payment Module</h5>
+                                            <br>
+                                            <div class="form-group col-md-12">
+                                                <label for="on_referral">Paid Package (in Rs.) </label>
+                                                <input type="text" wire:model.lazy="rule.price"
+                                                    class="form-control @error('rule.price') is-invalid @enderror"
+                                                    name="price" value="{{ old('price') }}" autocomplete="price" autofocus
+                                                    id="price" placeholder="Price of the Paid package">
+                                                @error('rule.on_referral')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col-md-12">
+                                                <label for="on_referral">Paid Package </label>
+                                                <input type="text" wire:model.lazy="rule.on_payment"
+                                                    class="form-control @error('rule.on_payment') is-invalid @enderror"
+                                                    name="on_payment" value="{{ old('on_payment') }}" autocomplete="on_payment" autofocus
+                                                    id="on_payment" placeholder="Number of Businesses on Every Payment">
+                                                @error('rule.on_payment')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
