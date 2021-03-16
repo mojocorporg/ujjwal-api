@@ -34,7 +34,7 @@ class PaymentController extends Controller
     
             $razor_order = $api->order->create([
                 'receipt' => "#receipt/$user->id",
-                'amount' => ($payment->price * 10) * 100,
+                'amount' => $payment->price  * 100,
                 'payment_capture' => 1,
                 'currency' => 'INR',
             ]);
