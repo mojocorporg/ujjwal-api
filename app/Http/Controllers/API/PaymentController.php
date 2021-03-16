@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'razorpay_order_id'=>$razor_order->id,
                     'price'=>$payment->price
                 ]);
-                return response()->json(['status' => true, 'message' => "Order Created successfully",'razorpay_order_id'=>$razor_order->id,'price'=>$payment->price *10]);
+                return response()->json(['status' => true, 'message' => "Order Created successfully",'razorpay_order_id'=>$razor_order->id,'price'=>$payment->price]);
             }
             else
             return response()->json(['status' => false, 'message' => "Razorpay didn't respond, try again later"]);
