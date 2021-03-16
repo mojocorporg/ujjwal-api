@@ -29,7 +29,7 @@ class BusinessController extends Controller
         if($request->user_id > 0 && $rules){
             $user=User::find($request->user_id);
             $referral = $user->referrals()->count();
-            $transactions=$user->transactions->where('status','success')->count();
+            $transactions=$user->transactions->where('status','paid')->count();
             $show_count = $rules->with_login + ($referral * $rules->on_referral) + ($transactions * $rules->on_payment);
         }elseif($rules){
             $show_count = $rules->without_login;
