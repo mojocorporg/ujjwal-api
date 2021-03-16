@@ -34,6 +34,8 @@ class BusinessController extends Controller
         }elseif($rules){
             $show_count = $rules->without_login;
         }
+
+        \Log::info('Show Count :'.$show_count);
         
         $business=collect();
         $business = Business::with('phones', 'tags', 'reviews')->where('status', 1);
