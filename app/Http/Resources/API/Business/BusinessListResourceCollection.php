@@ -14,8 +14,10 @@ class BusinessListResourceCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        $user=$request->user();
+        $premium=$user->transactions->where('status','paid')->count();
         return [
-            'premium'=>true,
+            'premium'=>$premium?true:false,
             'data'=>$this->collection
         ];
     }
