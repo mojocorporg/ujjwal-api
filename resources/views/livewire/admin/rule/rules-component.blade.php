@@ -54,7 +54,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group col-md-12">
-                                                <label for="without_login">Without Login </label>
+                                                <label for="without_login">Number of Businesses on without Login </label>
                                                 <input type="text" wire:model.lazy="rule.without_login"
                                                     class="form-control @error('rule.without_login') is-invalid @enderror"
                                                     name="without_login" value="{{ old('without_login') }}" autocomplete="without_login" autofocus
@@ -67,7 +67,7 @@
                                             </div>
         
                                             <div class="form-group col-md-12">
-                                                <label for="with_login">With Login </label>
+                                                <label for="with_login">Number of Businesses with Login </label>
                                                 <input type="text" wire:model.lazy="rule.with_login"
                                                     class="form-control @error('rule.with_login') is-invalid @enderror"
                                                     name="with_login" value="{{ old('with_login') }}" autocomplete="with_login" autofocus
@@ -80,7 +80,7 @@
                                             </div>
         
                                             <div class="form-group col-md-12">
-                                                <label for="on_referral">Every Referral </label>
+                                                <label for="on_referral">Number of Businesses on every Referral </label>
                                                 <input type="text" wire:model.lazy="rule.on_referral"
                                                     class="form-control @error('rule.on_referral') is-invalid @enderror"
                                                     name="on_referral" value="{{ old('on_referral') }}" autocomplete="on_referral" autofocus
@@ -95,7 +95,7 @@
                                             <h5>Payment Module</h5>
                                             <br>
                                             <div class="form-group col-md-12">
-                                                <label for="on_referral">Paid Package (in Rs.) </label>
+                                                <label for="on_referral">Price (in Rs.) </label>
                                                 <input type="text" wire:model.lazy="rule.price"
                                                     class="form-control @error('rule.price') is-invalid @enderror"
                                                     name="price" value="{{ old('price') }}" autocomplete="price" autofocus
@@ -108,7 +108,7 @@
                                             </div>
 
                                             <div class="form-group col-md-12">
-                                                <label for="on_referral">Paid Package </label>
+                                                <label for="on_referral">Number of Businesses on Every Payment</label>
                                                 <input type="text" wire:model.lazy="rule.on_payment"
                                                     class="form-control @error('rule.on_payment') is-invalid @enderror"
                                                     name="on_payment" value="{{ old('on_payment') }}" autocomplete="on_payment" autofocus

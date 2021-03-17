@@ -17,9 +17,11 @@ class BusinessListResourceCollection extends ResourceCollection
     {
         // $user=$request->user();
         $user=User::find($request->user_id);
-        $premium=$user->transactions->where('status','paid')->count();
+        $premium=false;
+        if($user)
+        $premium=$user->transactions->where('status','paid')->count()?true:false;
         return [
-            'premium'=>$premium?true:false,
+            'premium'=>$premium,
             'data'=>$this->collection
         ];
     }
