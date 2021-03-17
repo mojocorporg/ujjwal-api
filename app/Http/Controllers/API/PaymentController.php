@@ -63,7 +63,8 @@ class PaymentController extends Controller
         $transaction = Transaction::where('razorpay_order_id', $request->razorpay_order_id)->first();
         $success=false;
         $error="Something went wrong";
-
+        $user=$request->user();
+        $payment=Rule::first();
         if($transaction){
             try
             {
@@ -90,7 +91,7 @@ class PaymentController extends Controller
             }
         }
         if ($success === true) {
-            return response()->json(['status' => true, 'message' => 'Payment success/ Signature Verified']);
+            return response()->json(['status' => true, 'message' => 'Payment successful, '.$payment->on_payment.' more contacts added.']);
         } else {
             return response()->json(['status' => false, 'message' => $error]);
         }
