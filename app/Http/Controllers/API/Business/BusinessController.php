@@ -170,8 +170,13 @@ class BusinessController extends Controller
         // }else{
             $user->business_user()->firstOrCreate(['business_id' => $business->id, 'status' => $request->status]);
         // }
-
-        return response()->json(['status' => true, 'message' => 'Business added to my list']);
+        if($request->status){
+            $message='Business removed from my list';
+        }
+        else{
+            $message='Business added to my list';
+        }
+        return response()->json(['status' => true, 'message' => $message]);
     }
 
 
