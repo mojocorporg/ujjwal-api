@@ -35,7 +35,7 @@ class BusinessController extends Controller
             $show_count = $rules->without_login;
         }
 
-        \Log::info('Show Count :'.$show_count);
+        // \Log::info('Show Count :'.$show_count);
         
         $business=collect();
         $business = Business::with('phones', 'tags', 'reviews')->where('status', 1);
@@ -168,10 +168,10 @@ class BusinessController extends Controller
             $user_business->status = $request->status;
             $user_business->update();
         }else{
-            $user_business->create(['business_id' => $business->id, 'status' => $request->status]);
+            $user->business_user()->create(['business_id' => $business->id, 'status' => $request->status]);
         }
 
-        return response()->json(['status' => true, 'message' => 'Business Review Updated']);
+        return response()->json(['status' => true, 'message' => 'Business added to my list']);
     }
 
 
