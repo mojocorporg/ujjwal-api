@@ -170,7 +170,7 @@ class BusinessController extends Controller
         // }else{
             $user->business_user()->firstOrCreate(['business_id' => $business->id, 'status' => $request->status]);
         // }
-        if($request->status){
+        if(!$request->status){
             $message='Business removed from my list';
         }
         else{
