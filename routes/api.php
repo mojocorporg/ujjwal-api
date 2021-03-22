@@ -20,9 +20,6 @@ use App\Http\Controllers\API\Authorization\LoginController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::post('login',                                [LoginController::class, 'store']);
 Route::post('update_name',                          [UserController::class, 'update'])->middleware('auth:sanctum');
